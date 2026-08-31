@@ -1,0 +1,144 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "lean-operator-theory"
+  description: >-
+    Hilbert-space operator theory from unitary power dilation through von
+    Neumann's polynomial inequality, together with the Crouzeix--Palencia
+    theorem that the closed numerical range is a
+    (1 + square-root-of-2)-polynomial spectral set.
+  authors:
+    - "Ezzeri Esa"
+  responsible_maintainers:
+    - "Ezzeri Esa"
+  license: "Apache-2.0"
+
+classification:
+  arxiv: ["math.FA", "math.OA"]
+  msc2020: ["47A20", "47A25", "47A30"]
+
+sources:
+  - title: "The numerical range is a (1+sqrt 2)-spectral set"
+    authors:
+      - "Michel Crouzeix"
+      - "Catalin Palencia"
+    type: "paper"
+    id: "10.1137/17M1116672"
+    location: "Main theorem"
+    relationship: "adapts"
+    author_endorsement: "not-contacted"
+    note: >-
+      The Lean capstone records the polynomial-functional-calculus
+      specialization of the paper's stronger spectral-set theorem.
+  - title: "Harmonic Analysis of Operators on Hilbert Space"
+    authors:
+      - "Béla Sz.-Nagy"
+      - "Ciprian Foias"
+      - "Hari Bercovici"
+      - "László Kérchy"
+    type: "book"
+    id: "10.1007/978-1-4419-6094-8"
+    location: "Chapters 2–4"
+    relationship: "formalizes"
+    author_endorsement: "not-contacted"
+
+status:
+  scope: >-
+    Three compared theorems and zero definition holes.
+    CrouzeixPalenciaChallenge.lean is a 63-line Mathlib-only module with
+    complete definitions of the numerical
+    range, polynomial supremum norm, and polynomial spectral-set predicate.
+    The proof development contains no unresolved proof placeholders outside
+    the three deliberate Challenge theorem placeholders.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms:
+    - "propext"
+    - "Classical.choice"
+    - "Quot.sound"
+  main_results:
+    - declaration: "exists_unitary_power_dilation"
+      file: "CrouzeixPalenciaSolution.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "comparator-crouzeix-palencia.json"
+    - declaration: "vonNeumann_inequality"
+      file: "CrouzeixPalenciaSolution.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "comparator-crouzeix-palencia.json"
+    - declaration: "crouzeix_palencia"
+      file: "CrouzeixPalenciaSolution.lean"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      comparator_config: "comparator-crouzeix-palencia.json"
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["Claude Fable (Anthropic)", "GPT 5.6 Sol (OpenAI)"]
+      framework: "Codex, Claude Code, and a local multi-agent coordination harness"
+      tool_setup: >-
+        Claude Code and Codex multi-agent sessions constructed, compiled,
+        adversarially reviewed, and axiom-audited the proof library. Codex
+        designed and verified the compact Palomar publication boundary and
+        packaging.
+      cost:
+        wall_time: "not tracked"
+        spend_usd: "subscription-based"
+        hardware: "local machine"
+  notes: >-
+    The development used exact boundary signatures and staged verification.
+    An initially proposed fixed-domain product lemma in the
+    Crouzeix--Palencia route was disproved by a formal counterexample and
+    retired; the final unconditional capstone follows a different valid
+    smooth-support outer-approximation route.
+
+fidelity:
+  divergences: >-
+    The unitary dilation is stated existentially on a larger Hilbert space in
+    the same universe and includes compression of every natural power. The
+    selected von Neumann theorem is for complex polynomials and the closed
+    unit disk. The selected Crouzeix--Palencia theorem concerns polynomial
+    evaluation on the closure of the numerical range; the source article
+    proves a stronger rational/holomorphic spectral-set result.
+
+review:
+  status: "agent-reviewed"
+  reviewers:
+    - "Ezzeri Esa"
+    - "Claude Code (Anthropic)"
+    - "Codex (OpenAI)"
+  notes: >-
+    The production source was scanned for unresolved placeholders. All three
+    selected declarations elaborate with exactly propext, Classical.choice,
+    and Quot.sound. On 2026-08-30 the 63-line Mathlib-only Challenge and
+    Solution passed a local Comparator run using Lean's default kernel and a
+    development fake-Landrun wrapper. An adversarial factor-of-two weakening
+    of von Neumann's bound was rejected specifically at that declaration while
+    the other two declarations continued to match. A protected NanoDa run
+    remains pending.
+
+alignment:
+  statements:
+    - source: "Sz.-Nagy--Foias, unitary dilation theorem"
+      lean: "exists_unitary_power_dilation"
+      module: "CrouzeixPalenciaSolution"
+      status: "proved"
+      note: "Every contraction has a unitary dilation compressing all natural powers."
+    - source: "Sz.-Nagy--Foias, von Neumann inequality"
+      lean: "vonNeumann_inequality"
+      module: "CrouzeixPalenciaSolution"
+      status: "proved"
+      note: "Polynomial norm bound for contractions on the complex closed unit disk."
+    - source: "Crouzeix--Palencia, main theorem"
+      lean: "crouzeix_palencia"
+      module: "CrouzeixPalenciaSolution"
+      status: "proved"
+      note: >-
+        Polynomial specialization with exact constant 1 + square root of 2
+        on the closure of the numerical range.
+
+acknowledgements: >-
+  Mathlib contributors; leanprover/comparator and NanoDa maintainers.

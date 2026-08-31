@@ -1,0 +1,12 @@
+{
+  "challenge_module": "CrouzeixPalenciaChallenge",
+  "solution_module": "CrouzeixPalenciaSolution",
+  "theorem_names": [
+    "exists_unitary_power_dilation",
+    "vonNeumann_inequality",
+    "crouzeix_palencia"
+  ],
+  "definition_names": [],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"],
+  "enable_nanoda": true
+}
