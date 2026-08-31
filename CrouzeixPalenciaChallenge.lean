@@ -19,6 +19,8 @@ advertised theorem proofs are omitted; every boundary definition is complete.
 
 open scoped InnerProductSpace Polynomial
 
+namespace PalomarCrouzeixPalencia
+
 variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℂ E]
 
 /-- The numerical range of a bounded operator. -/
@@ -56,8 +58,10 @@ theorem vonNeumann_inequality (T : E →L[ℂ] E) (hT : ‖T‖ ≤ 1)
       polynomialSupNorm p (Metric.closedBall (0 : ℂ) 1) := by
   sorry
 
-/-- The exact Crouzeix--Palencia polynomial spectral-set theorem. -/
+/-- The Crouzeix--Palencia polynomial spectral-set theorem. -/
 theorem crouzeix_palencia (A : E →L[ℂ] E) :
     IsKPolynomialSpectralSet A (1 + Real.sqrt 2)
       (closure (numericalRange A)) := by
   sorry
+
+end PalomarCrouzeixPalencia

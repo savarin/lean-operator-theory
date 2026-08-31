@@ -24,7 +24,7 @@ For a bounded operator on a complex Hilbert space:
 
 The numerical range encodes the "shadow" of an operator seen through
 inner products. Crouzeix and Palencia proved that this shadow controls
-the polynomial functional calculus with the exact constant 1 + √2 —
+the polynomial functional calculus with the Crouzeix--Palencia constant 1 + √2 —
 any polynomial applied to the operator is bounded by that factor times
 the polynomial's supremum on the numerical range. This connects
 classical dilation theory (Sz.-Nagy, von Neumann) to modern
@@ -40,6 +40,10 @@ records the polynomial specialization of the paper's stronger
 spectral-set theorem. The audience is researchers in operator theory,
 numerical linear algebra, and the formalization community working on
 functional analysis in Lean/Mathlib.
+
+No numerical-range, von Neumann inequality, or Crouzeix material
+exists in Mathlib at the pinned revision (v4.33.0). Cross-prover
+novelty has not been searched.
 
 For a detailed proof route in plain mathematics, see
 `BLUEPRINT.md`.
@@ -103,11 +107,19 @@ scripts/run_comparator.sh
 ```
 
 On 2026-08-30, all three declarations passed Comparator with Lean's
-default kernel. A negative control multiplied the right-hand side of
-von Neumann's inequality by two; Comparator rejected exactly that
-theorem while continuing to match the other two declarations. Palomar
-runs its own pinned Comparator, Landrun sandbox, and NanoDa
-kernel.
+default kernel. That run predates the 2026-08-31 namespace-bridge fix:
+the file renames left the Challenge and the proof library declaring
+same-named top-level copies of `numericalRange`, `polynomialSupNorm`,
+and `IsKPolynomialSpectralSet`, which elaborated to non-matching
+internals and broke Comparator. The Challenge now declares its
+boundary inside the `PalomarCrouzeixPalencia` namespace and the
+Solution redeclares it as a bridge, delegating each theorem to the
+library via `_root_`. Re-run on 2026-08-31 at the fixed HEAD: all
+three declarations pass again. A negative control multiplied the
+right-hand side of von Neumann's inequality by two; Comparator
+rejected exactly that theorem while continuing to match the other two
+declarations. Palomar runs its own pinned Comparator, Landrun
+sandbox, and NanoDa kernel.
 
 ## License
 

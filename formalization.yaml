@@ -16,13 +16,13 @@ project:
 
 classification:
   arxiv: ["math.FA", "math.OA"]
-  msc2020: ["47A20", "47A25", "47A30"]
+  msc2020: ["47A12", "47A20", "47A25", "47A30"]
 
 sources:
   - title: "The numerical range is a (1+sqrt 2)-spectral set"
     authors:
       - "Michel Crouzeix"
-      - "Catalin Palencia"
+      - "César Palencia"
     type: "paper"
     id: "10.1137/17M1116672"
     location: "Main theorem"
@@ -42,15 +42,30 @@ sources:
     location: "Chapters 2–4"
     relationship: "formalizes"
     author_endorsement: "not-contacted"
+  - title: "Remarks on the Crouzeix--Palencia proof that the numerical range is a (1+sqrt 2)-spectral set"
+    authors:
+      - "Thomas Ransford"
+      - "Felix Schwenninger"
+    type: "paper"
+    id: "10.1137/17M1143757"
+    location: "Main theorem"
+    relationship: "adapts"
+    author_endorsement: "not-contacted"
+    note: >-
+      The Crouzeix--Palencia bound follows the Ransford--Schwenninger
+      short proof via a quartic inequality, not the original 2017 paper.
 
 status:
   scope: >-
     Three compared theorems and zero definition holes.
     CrouzeixPalenciaChallenge.lean is a 63-line Mathlib-only module with
     complete definitions of the numerical
-    range, polynomial supremum norm, and polynomial spectral-set predicate.
-    The proof development contains no unresolved proof placeholders outside
-    the three deliberate Challenge theorem placeholders.
+    range, polynomial supremum norm, and polynomial spectral-set predicate,
+    all inside the PalomarCrouzeixPalencia namespace. The proof development
+    contains no unresolved proof placeholders outside the three deliberate
+    Challenge theorem placeholders. No numerical-range or von Neumann
+    inequality material exists in Mathlib at v4.33.0; cross-prover novelty
+    has not been searched.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms:
@@ -58,17 +73,17 @@ status:
     - "Classical.choice"
     - "Quot.sound"
   main_results:
-    - declaration: "exists_unitary_power_dilation"
+    - declaration: "PalomarCrouzeixPalencia.exists_unitary_power_dilation"
       file: "CrouzeixPalenciaSolution.lean"
       sorry_count: 0
       axioms: ["propext", "Classical.choice", "Quot.sound"]
       comparator_config: "comparator-crouzeix-palencia.json"
-    - declaration: "vonNeumann_inequality"
+    - declaration: "PalomarCrouzeixPalencia.vonNeumann_inequality"
       file: "CrouzeixPalenciaSolution.lean"
       sorry_count: 0
       axioms: ["propext", "Classical.choice", "Quot.sound"]
       comparator_config: "comparator-crouzeix-palencia.json"
-    - declaration: "crouzeix_palencia"
+    - declaration: "PalomarCrouzeixPalencia.crouzeix_palencia"
       file: "CrouzeixPalenciaSolution.lean"
       sorry_count: 0
       axioms: ["propext", "Classical.choice", "Quot.sound"]
@@ -115,25 +130,38 @@ review:
     selected declarations elaborate with exactly propext, Classical.choice,
     and Quot.sound. On 2026-08-30 the 63-line Mathlib-only Challenge and
     Solution passed a local Comparator run using Lean's default kernel and a
-    development fake-Landrun wrapper. An adversarial factor-of-two weakening
-    of von Neumann's bound was rejected specifically at that declaration while
-    the other two declarations continued to match. A protected NanoDa run
-    remains pending.
+    development fake-Landrun wrapper. That run predates the 2026-08-31
+    namespace-bridge fix (PalomarCrouzeixPalencia): the Challenge and the
+    proof library had independently declared same-named top-level copies of
+    numericalRange, polynomialSupNorm, and IsKPolynomialSpectralSet, which
+    elaborated to non-matching internals and broke the comparator after the
+    2026-08-30 file renames. The Challenge now declares its boundary inside
+    the PalomarCrouzeixPalencia namespace and the Solution redeclares it as a
+    bridge, delegating each theorem to the library via `_root_`. Re-run
+    2026-08-31 at the fixed HEAD: all three declarations pass. An adversarial
+    factor-of-two weakening of von Neumann's bound was rejected specifically
+    at that declaration while the other two declarations continued to match.
+    A protected NanoDa run remains pending.
+
+    Human review (Ezzeri Esa): verified the Challenge theorem statements
+    against the source papers (Crouzeix--Palencia, Ransford--Schwenninger)
+    and Sz.-Nagy--Foias. Lean proof code produced by AI agents under the
+    author's direction.
 
 alignment:
   statements:
     - source: "Sz.-Nagy--Foias, unitary dilation theorem"
-      lean: "exists_unitary_power_dilation"
+      lean: "PalomarCrouzeixPalencia.exists_unitary_power_dilation"
       module: "CrouzeixPalenciaSolution"
       status: "proved"
       note: "Every contraction has a unitary dilation compressing all natural powers."
     - source: "Sz.-Nagy--Foias, von Neumann inequality"
-      lean: "vonNeumann_inequality"
+      lean: "PalomarCrouzeixPalencia.vonNeumann_inequality"
       module: "CrouzeixPalenciaSolution"
       status: "proved"
       note: "Polynomial norm bound for contractions on the complex closed unit disk."
     - source: "Crouzeix--Palencia, main theorem"
-      lean: "crouzeix_palencia"
+      lean: "PalomarCrouzeixPalencia.crouzeix_palencia"
       module: "CrouzeixPalenciaSolution"
       status: "proved"
       note: >-

@@ -11,7 +11,7 @@ the manifest separately audits the production declaration's axioms.
 open Complex ContinuousLinearMap Metric Polynomial Set
 open scoped ENNReal InnerProductSpace Interval Real
 
-namespace Challenge
+namespace CrouzeixPalenciaBoundary
 
 universe u
 
@@ -161,4 +161,4 @@ theorem exists_smoothJordanDomain_norm_bound_crouzeixPolynomialAuxiliaryOperator
 
 end Auxiliary
 
-end Challenge
+end CrouzeixPalenciaBoundary

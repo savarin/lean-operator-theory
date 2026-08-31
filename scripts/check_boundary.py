@@ -110,8 +110,14 @@ def main() -> None:
     if sorry_count != len(theorems):
         fail(f"Challenge has {sorry_count} sorry tokens for "
              f"{len(theorems)} selected theorems")
+    namespaces = re.findall(r"^namespace\s+(\S+)", raw, re.MULTILINE)
     for name in theorems:
-        if not re.search(rf"\b(?:theorem|lemma)\s+{re.escape(name)}\b", raw):
+        short = name
+        for ns in namespaces:
+            if name.startswith(ns + "."):
+                short = name[len(ns) + 1:]
+                break
+        if not re.search(rf"\b(?:theorem|lemma)\s+{re.escape(short)}\b", raw):
             fail(f"selected theorem {name!r} is not declared in Challenge")
 
     metadata = pathlib.Path("formalization.yaml")
