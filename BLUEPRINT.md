@@ -97,10 +97,11 @@ giving explicit boundary values used to control the product bound.
 **Layer B5 — scalar-companion approximation and multiplicative-triple
 bound.** A scalar prototype of the auxiliary operator (the scalar
 Cauchy companion) is approximated uniformly by polynomials on the
-smooth domain — a Runge-type argument using the connected complement.
-The product bound ‖p(A) G_p p(A)‖ ≤ K · sup³ is established via the
-multiplicative triple: submultiplicativity of polynomial sup norms on
-compact convex sets, combined with the norm of the auxiliary operator.
+smooth domain, via Mergelyan's theorem (compact convex ⟹ connected
+complement ⟹ polynomial approximants). The product bound
+‖p(A) G_p p(A)‖ ≤ K · sup³ is established via the multiplicative
+triple: submultiplicativity of polynomial sup norms on compact convex
+sets, combined with the norm of the auxiliary operator.
 
 **Layer B6 — the algebraic core (Ransford–Schwenninger quartic
 bootstrap).** Using the C*-identity ‖F‖⁴ ≤ ‖F + G*‖ · ‖F‖³ +
@@ -119,12 +120,20 @@ be a smooth strictly-convex Jordan domain. But W̄(A) for a general
 operator is merely compact and convex. A large geometric pipeline:
 (a) approximates the convex set by a polytope with rounded corners;
 (b) proves every full-dimensional finite convex hull has arbitrarily
-tight smooth Jordan outer approximations in a strict nested
-exhaustion; and (c) proves a Runge/Mergelyan-type polynomial
-approximation theorem on these domains (compact convex ⟹ connected
-complement ⟹ explicit geometric-series polynomial approximants to the
-Cauchy kernel). This lets the polynomial bound proved on approximating
-smooth domains pass to the limit and recover the bound on W̄(A).
+tight smooth Jordan outer approximations, chosen recursively into a
+strict nested exhaustion Ω₀ ⊃ Ω₁ ⊃ ⋯ with ⋂ₙ closure(Ωₙ) = W̄(A); and
+(c) invokes Mergelyan's theorem (Layer B5) on every Ωₙ, discharging
+the scalar-companion approximation hypothesis at each stage.
+
+The bound produced by Layers B2–B6 is therefore available at every
+stage n, in terms of the polynomial sup-norm on closure(Ωₙ). Passing
+this to a bound on W̄(A) itself is a separate step, unrelated to
+Mergelyan: since the closure(Ωₙ) form a decreasing sequence of compact
+sets intersecting to W̄(A), Cantor's intersection theorem together with
+the extreme value theorem show the polynomial sup-norms on closure(Ωₙ)
+converge to the sup-norm on W̄(A). Feeding this convergence into the
+ε-limit form of the Layer B6 balance estimate recovers the bound on
+W̄(A) exactly.
 
 **Normal-operator shortcut.** For normal A, the sharp constant 1
 (not 1 + √2) follows directly from the spectral mapping theorem in a
@@ -163,6 +172,13 @@ Neumann's inequality for unitaries in Chain A.
    reduction that lets the smooth-domain argument apply to a general
    compact convex numerical range.
 
+10. **Polynomial sup-norm convergence along decreasing compacts.** If
+    Kₙ is a decreasing sequence of nonempty compact sets, the
+    polynomial sup-norms on Kₙ converge to the sup-norm on ⋂ₙ Kₙ, via
+    Cantor's intersection theorem and the extreme value theorem. The
+    mechanism that passes the Layer B2–B6 bound from each smooth stage
+    to W̄(A) itself — distinct from Mergelyan's role in Layer B5.
+
 ## Pitfalls
 
 1. **The dilation route is not the textbook one.** The power dilation
@@ -189,9 +205,12 @@ Neumann's inequality for unitaries in Chain A.
    the same lemma. The shared dependency is structural, not
    accidental.
 
-5. **The polynomial bound on smooth approximating domains must survive
-   a limiting argument.** The passage from "bound on each smooth
-   Jordan domain Ωₙ ⊃ W̄(A)" to "bound on W̄(A) itself" requires a
-   Runge/Mergelyan polynomial approximation theorem, not just a
-   continuity argument. This is where the connected-complement
-   condition becomes load-bearing.
+5. **Two distinct approximation steps are easy to conflate.**
+   Mergelyan's theorem supplies the polynomial approximants to the
+   scalar companion needed at each individual smooth stage Ωₙ
+   (Layer B5) — this is where the connected-complement condition is
+   load-bearing. The separate passage from "bound on each smooth
+   Jordan domain Ωₙ ⊃ W̄(A)" to "bound on W̄(A) itself" is not a second
+   application of Mergelyan: it uses convergence of polynomial
+   sup-norms along the decreasing compact sequence closure(Ωₙ), via
+   Cantor's intersection theorem and the extreme value theorem.
