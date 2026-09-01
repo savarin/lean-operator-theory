@@ -29,19 +29,19 @@ spectral-mapping bound for normal operators.
 
 ### Chain A — dilation and von Neumann's inequality
 
-**Layer A1 — the defect operator.** For a contraction T, the operator
-I − T*T is positive; its positive square root D_T (via the continuous
-functional calculus) is the defect operator, satisfying the isometry
-identity ‖Tx‖² + ‖D_T x‖² = ‖x‖². The intertwining relation
-T · D_{T*} = D_T · T* (proved via a general fact: an intertwiner of
-self-adjoint operators intertwines their functional calculi) ensures
-the off-diagonal blocks of the next step fit together.
+**Layer A1 — off-diagonal self-adjoint contraction.** For a contraction
+T, the off-diagonal block map a: (x, y) ↦ (Ty, T*x) on E ⊕ E is
+self-adjoint (by adjoint symmetry of the two components) and a
+contraction (by T's own norm bound).
 
-**Layer A2 — Halmos one-step dilation.** The off-diagonal block map
-(x, y) ↦ (Ty, T*x) on E ⊕ E is a self-adjoint contraction; adjoining
-i√(I − a²) completes it to a unitary w. Composing with the coordinate
-flip gives a unitary U on E ⊕ E whose compression to the first
-summand is exactly T — for one step only: V*UV = T, but V*U²V ≠ T².
+**Layer A2 — functional-calculus completion to unitary.** The
+self-adjoint contraction a from Layer A1 is completed to a unitary via
+w = a + i · √(I − a²), where the square root is the continuous
+functional calculus applied to the nonneg operator I − a². This is a
+general Mathlib fact: every self-adjoint contraction in a C*-algebra
+completes to a unitary this way. Composing with the coordinate flip
+gives a unitary U on E ⊕ E whose compression to the first summand is
+exactly T — for one step only: V*UV = T, but V*U²V ≠ T².
 
 **Layer A3 — Schäffer power dilation.** The power dilation uses a
 bilateral repeated-interaction model on ℓ²(ℤ, E ⊕ E). The same
@@ -94,15 +94,19 @@ prototype of the auxiliary operator is analyzed via the classical
 Sokhotski–Plemelj jump formula for Cauchy-type boundary integrals,
 giving explicit boundary values used to control the product bound.
 
-**Layer B5 — the product bound.** A sharp one-sided bound on
-Re⟨x, p(A) G_p x⟩ is established by an explicit computation for
-degree-0 polynomials, then extended to general degree by induction.
+**Layer B5 — scalar-companion approximation and multiplicative-triple
+bound.** A scalar prototype of the auxiliary operator (the scalar
+Cauchy companion) is approximated uniformly by polynomials on the
+smooth domain — a Runge-type argument using the connected complement.
+The product bound ‖p(A) G_p p(A)‖ ≤ K · sup³ is established via the
+multiplicative triple: submultiplicativity of polynomial sup norms on
+compact convex sets, combined with the norm of the auxiliary operator.
 
-**Layer B6 — the algebraic core (Ransford–Schwenninger identity).**
-Using the C*-identity ‖F‖² = ‖FF*‖ with F = p(A) and G = the
-auxiliary operator, plus the symmetrized bound (Layer B3) and product
-bound (Layer B5), a quadratic-form manipulation produces a quartic
-inequality in the best constant K:
+**Layer B6 — the algebraic core (Ransford–Schwenninger quartic
+bootstrap).** Using the C*-identity ‖F‖⁴ ≤ ‖F + G*‖ · ‖F‖³ +
+‖FGF‖ · ‖F‖ with F = p(A) and G = the auxiliary operator, plus the
+symmetrized bound (Layer B3) and the multiplicative-triple bound
+(Layer B5), produces a quartic inequality in the best constant K:
 
     K⁴ ≤ 2K³ + K²
 
@@ -129,11 +133,11 @@ Neumann's inequality for unitaries in Chain A.
 
 ## Key lemmas
 
-1. **The defect isometry identity.** ‖Tx‖² + ‖D_T x‖² = ‖x‖² for
-   contractions. Makes the Halmos block work.
+1. **Off-diagonal self-adjoint contraction.** The map (x,y) ↦ (Ty, T*x)
+   is self-adjoint and contractive. The starting point for the dilation.
 
-2. **The defect intertwining relation.** T · D_{T*} = D_T · T*. Makes
-   the Halmos block unitary.
+2. **Functional-calculus completion.** a + i√(1 − a²) is unitary for any
+   self-adjoint contraction a. Produces the Halmos unitary.
 
 3. **Schäffer power induction.** V*UⁿV = Tⁿ for all n ≥ 0. The
    "power" in power dilation.

@@ -31,7 +31,6 @@ import Operator.Crouzeix.NormalProductSymmetrized
 import Operator.Crouzeix.Palencia
 import Operator.Crouzeix.PalenciaApproximation
 import Operator.Crouzeix.PalenciaExhaustion
-import Operator.Crouzeix.PalenciaProductBase
 import Operator.Crouzeix.PalenciaSmoothApproximation
 import Operator.Crouzeix.PalenciaSupport
 import Operator.Crouzeix.PlanarDualDirection
@@ -43,11 +42,8 @@ import Operator.Crouzeix.PolytopeSoftSupport
 import Operator.Crouzeix.PolytopeSoftSupportCurvature
 import Operator.Crouzeix.PositiveIntegral
 import Operator.Crouzeix.PositiveKernelBound
-import Operator.Crouzeix.ProductAlignedObstruction
 import Operator.Crouzeix.ProductBase
 import Operator.Crouzeix.ProductContour
-import Operator.Crouzeix.ProductInduction
-import Operator.Crouzeix.ProductInductionObstruction
 import Operator.Crouzeix.ProductNormalization
 import Operator.Crouzeix.ProductSymmetrizedAlignment
 import Operator.Crouzeix.ScalarCauchyKernelConstancy
@@ -98,7 +94,6 @@ import Operator.Crouzeix.SpectralSetSuperset
 import Operator.Crouzeix.SymmetrizedAuxiliary
 import Operator.Crouzeix.SymmetrizedBound
 import Operator.Crouzeix.VonNeumann
-import Operator.Dilation.Defect
 import Operator.Dilation.Halmos
 import Operator.Dilation.Schaeffer
 import Operator.NumericalRange.Adjoint
